@@ -26,3 +26,20 @@ function getDateTime() {
      return dateTime;
 }
 
+setInterval(function(){
+    dateTime = getDateTime();
+    document.getElementById("currentDay").innerHTML = dateTime;
+}, 1000);
+
+
+function saveUserInput () {
+    var userEvent = document.querySelector("#userEvent").value;
+    localStorage.setItem("userEvent", userEvent);
+    }
+function userData (){
+    var oldInput= localStorage.getItem("userEvent");
+    document.querySelector("#userEvent").value = oldInput
+}
+window.onload = function() {
+    userData();
+      };
