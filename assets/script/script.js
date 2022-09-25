@@ -1,51 +1,39 @@
 var data=[];
+$("#currentDay").text(moment().format('dddd MMMM Do YYYY'));
+function Color() {
+     var pageTime = moment().hours();
 
-function getDateTime() {
-     var currentDate = new Date();
-     var year    = currentDate.getFullYear();
-     var month   = currentDate.getMonth()+1; 
-     var day     = currentDate.getDate();
-     var hour    = currentDate.getHours();
-     var minute  = currentDate.getMinutes();
-     var second  = currentDate.getSeconds(); 
+     $(".time-block").each(function() {
+          var actualTime = parseInt($(this).attr("id"));
 
-     if(month.toString().length == 1) {
-          month = '0'+month;
+          // console.log(this); //each time-block
+
+          if (actualTime > pageTime) {
+          $(this).addClass("future");
+          } else if (actualTime === pageTime) {
+          $(this).addClass("current");
+          } else {
+          $(this).addClass("past");
+          }
+     })
+};
+
+function saveUserInput (button) {//saves
+     let $timeBlock = $(button).closest(".time-block");
+     let storage = $timeBlock.attr("id");
+     if ($timeBlock.children('textarea').val() === "")
+     {
+          alert("please enter some text");
      }
-     if(day.toString().length == 1) {
-          day = '0'+day;
-     }   
-     if(hour.toString().length == 1) {
-          hour = '0'+hour;
-     }
-     if(minute.toString().length == 1) {
-          minute = '0'+minute;
-     }
-     if(second.toString().length == 1) {
-          second = '0'+second;
-     }   
-     var dateTime = month+'/'+day+'/'+year+' '+hour+':'+minute+':'+second;   
-      return dateTime;
- }
+     localStorage.setItem(storage, $timeBlock.children('textarea').val());
+}
 
- setInterval(function(){
-     dateTime = getDateTime();
-     document.getElementById("currentDay").innerHTML = dateTime;
- }, 1000);
-
-
- function saveUserInput () {//saves
+function userData (){//loads
      $('div[class="row time-block"]').each(function(){
-           let id = $(this).attr("id");
-           localStorage.setItem(id,$(this).children('textarea').val());
-      });
- }
- function userData (){//loads
-     $('div[class="row time-block"]').each(function(){
-           let id = $(this).attr("id");
-           $(this).children('textarea').val(localStorage.getItem(id));
+          let storage = $(this).attr("id");
+          $(this).children('textarea').val(localStorage.getItem(storage));
      });
- }
- window.onload = function() {
-     userData();
- };
+}
+
+userData();
+Color();
