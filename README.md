@@ -3,7 +3,7 @@
 Respository link: https://github.com/AaronVenema/Scheduler
 Deployment link: https://aaronvenema.github.io/Scheduler/
 
-https://github.com/AaronVenema/Scheduler/blob/main/assets/images/scheduler.png?raw=true
+![image](https://user-images.githubusercontent.com/34764586/192155240-225f2952-2b89-45ac-80e3-fb1fa94a8dab.png)
 
 This 05-challenge- scheduler is an introduction to thirdparty appilcations such as jquery. Students deploy a web page that is responsible for generating
 a color coded event planner for the current day that saves user input and reloads upon page refresh.
